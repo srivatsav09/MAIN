@@ -15,6 +15,18 @@ class App extends React.Component {
     .catch(err => { })
   }
 
+  createData = (event) => {
+    let data;
+    axios.get('http://localhost:8000/create')
+    .then(res => {
+      data=res.data;
+      this.setState({
+        details: data
+      });
+    })
+    .catch(err => { })
+  }
+
 
   render(){
     return(
@@ -23,6 +35,15 @@ class App extends React.Component {
       <hr></hr>
       <button onClick={this.clickHandler}>CLick to generate data</button>
     
+      {this.state.details.map((output,id) => (
+        <div key={id}>
+          <div>
+            <h2>{output.employee} -- {output.department}</h2>
+            {/* <h3>{output.department}</h3> */}
+          </div>
+        </div>
+      ))}
+      <button onClick={this.createData}>Create Data ?</button>
       {this.state.details.map((output,id) => (
         <div key={id}>
           <div>
