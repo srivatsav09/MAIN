@@ -3,7 +3,7 @@ import React from 'react'
 class App extends React.Component {
   state = {details: []}
 
-  componentDidMount() {
+  clickHandler = (event) => {
     let data;
     axios.get('http://localhost:8000')
     .then(res => {
@@ -15,11 +15,14 @@ class App extends React.Component {
     .catch(err => { })
   }
 
+
   render(){
     return(
       <>
       <header>Data Generated from django</header>
       <hr></hr>
+      <button onClick={this.clickHandler}>CLick to generate data</button>
+    
       {this.state.details.map((output,id) => (
         <div key={id}>
           <div>
